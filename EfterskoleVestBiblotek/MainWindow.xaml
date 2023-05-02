@@ -47,6 +47,7 @@
                     <DataGrid x:Name="DgBookRentals" HorizontalAlignment="Left" Height="386" Margin="385,0,0,0" VerticalAlignment="Center" Width="399" ItemsSource="{Binding BookRentals}" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Book" Binding="{Binding Book.Title}"/>
+                            <DataGridTextColumn Header="Customer" Binding="{Binding Customer.Email}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <ComboBox x:Name="CbxCustomers" HorizontalAlignment="Left" Margin="31,66,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbxCustomers_SelectionChanged" ItemsSource="{Binding Customers}">
