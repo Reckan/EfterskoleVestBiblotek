@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace DataClasses
 {
@@ -72,6 +73,19 @@ namespace DataClasses
             {
                 isbn = value;
                 RaisePropertyChanged(nameof(ISBN));
+            }
+        }
+        public ObservableCollection<BookRental> Rentals { get; } = new();
+        public int BooksAvailable
+        {
+            get
+            {
+                int booksAvailable = Stock;
+                foreach(BookRental bookRental in Rentals)
+                {
+                    booksAvailable -= bookRental.BooksRented;
+                }
+                return booksAvailable;
             }
         }
 

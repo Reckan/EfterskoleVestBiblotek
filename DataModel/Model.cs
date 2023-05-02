@@ -109,5 +109,20 @@ namespace DataModel
             Customers.Remove(customer);
             DoSave();
         }
+
+        public void AddBookRental(BookRental bookRental)
+        {
+            BookRentals.Add(bookRental);
+            DoSave();
+        }
+        public void RemoveBookRental(BookRental bookRental)
+        {
+            BookRentals.Remove(bookRental);
+            DoSave();
+        }
+        public void Update()
+        {
+            DoSave();
+        }
     }
 }

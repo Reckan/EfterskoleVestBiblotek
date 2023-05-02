@@ -11,12 +11,12 @@
             <TabItem Header="Books">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="DgBooks" HorizontalAlignment="Left" Height="264" Margin="468,36,0,0" VerticalAlignment="Top" Width="291" ItemsSource="{Binding Books}" IsReadOnly="True"/>
-                    <TextBox x:Name="TbxBookAuthor" HorizontalAlignment="Left" Margin="75,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="TbxBookTitle" HorizontalAlignment="Left" Margin="75,102,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="TbxBookPublisher" HorizontalAlignment="Left" Margin="75,154,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="TbxBookAuthor" HorizontalAlignment="Left" Margin="75,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="TbxBookTitle" HorizontalAlignment="Left" Margin="75,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="TbxBookPublisher" HorizontalAlignment="Left" Margin="75,154,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <DatePicker x:Name="DtPDatePublication" HorizontalAlignment="Left" Margin="235,36,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="TbxStock" HorizontalAlignment="Left" Margin="75,215,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="TbxISBN" HorizontalAlignment="Left" Margin="75,267,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="TbxStock" HorizontalAlignment="Left" Margin="75,215,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="TbxISBN" HorizontalAlignment="Left" Margin="75,267,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="LabelTbxAuthor" Content="Author:" HorizontalAlignment="Left" Margin="75,10,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="LabelTbxTitel" Content="Titel:" HorizontalAlignment="Left" Margin="75,71,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="LabelTbxBookPublisher" Content="Publisher:" HorizontalAlignment="Left" Margin="75,128,0,0" VerticalAlignment="Top"/>
@@ -31,9 +31,9 @@
             </TabItem>
             <TabItem Header="Customers">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="DgCustomers" HorizontalAlignment="Left" Height="386" Margin="482,0,0,0" VerticalAlignment="Center" Width="302" ItemsSource="{Binding Customers}"/>
-                    <TextBox x:Name="TbxIDNumber" HorizontalAlignment="Left" Margin="108,81,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="TbxEmail" HorizontalAlignment="Left" Margin="111,156,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <DataGrid x:Name="DgCustomers" HorizontalAlignment="Left" Height="386" Margin="482,0,0,0" VerticalAlignment="Center" Width="302" ItemsSource="{Binding Customers}" IsReadOnly="True"/>
+                    <TextBox x:Name="TbxIDNumber" HorizontalAlignment="Left" Margin="108,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="TbxEmail" HorizontalAlignment="Left" Margin="111,156,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="LabelTbxIDNumber" Content="IDNumber:" HorizontalAlignment="Left" Margin="108,50,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="LabelTbxEmail" Content="Email:" HorizontalAlignment="Left" Margin="111,125,0,0" VerticalAlignment="Top"/>
                     <Button x:Name="BtnSaveCustomer" Content="Save" HorizontalAlignment="Left" Margin="427,292,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnSaveCustomer_Click"/>
@@ -44,6 +44,40 @@
             </TabItem>
             <TabItem Header="Book Rentals">
                 <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="DgBookRentals" HorizontalAlignment="Left" Height="386" Margin="385,0,0,0" VerticalAlignment="Center" Width="399" ItemsSource="{Binding BookRentals}" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Book" Binding="{Binding Book.Title}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <ComboBox x:Name="CbxCustomers" HorizontalAlignment="Left" Margin="31,66,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbxCustomers_SelectionChanged" ItemsSource="{Binding Customers}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding IDNumber}"/>
+                                    <Run Text="-"/>
+                                    <Run Text="{Binding Email}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ComboBox x:Name="CbxBooks" HorizontalAlignment="Left" Margin="185,66,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbxBooks_SelectionChanged" ItemsSource="{Binding Books}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding Title}"/>
+                                    <Run Text="-"/>
+                                    <Run Text="{Binding Author}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    
+                    <Button x:Name="BtnRentBook" Content="Rent" HorizontalAlignment="Left" Margin="330,186,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnRentBook_Click"/>
+                    <Button x:Name="BtnReturnBook" Content="Return" HorizontalAlignment="Left" Margin="330,216,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnReturnBook_Click"/>
+                    <TextBox x:Name="TbxBooksRented" HorizontalAlignment="Left" Margin="31,152,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="LabelBook" Content="Book" HorizontalAlignment="Left" Margin="185,40,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="LabelCustomer" Content="Customer" HorizontalAlignment="Left" Margin="31,35,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Qty." HorizontalAlignment="Left" Margin="31,121,0,0" VerticalAlignment="Top"/>
 
                 </Grid>
             </TabItem>

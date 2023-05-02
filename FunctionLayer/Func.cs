@@ -87,9 +87,32 @@ namespace FunctionLayer
                 {
                     throw new Exception("Books cant have the same title");
                 }
-                if(book.ISBN == bookInfo.ISBN && book != existingBook)
+                if (book.ISBN == bookInfo.ISBN && book != existingBook)
                 {
-                    throw new Exception("");
+                    throw new Exception("This ISBN don't belong to this book");
+                }
+            }
+        }
+
+        private void ValidateCustomer(Customer customerInfo, Customer existingCustomer)
+        {
+            if (customerInfo.IDNumber < 1)
+            {
+                throw new Exception("");
+            }
+            if (customerInfo.Email == "")
+            {
+                throw new Exception("");
+            }
+            foreach (Customer customer in Customers)
+            {
+                if (customer.IDNumber == customerInfo.IDNumber && customer != existingCustomer)
+                {
+                    throw new Exception("Two Customers can't have the same ID Number");
+                }
+                if (customer.Email == customerInfo.Email && customer != existingCustomer)
+                {
+                    throw new Exception("This Email is already in use");
                 }
             }
         }
@@ -106,6 +129,8 @@ namespace FunctionLayer
                 ISBN = isbn,
             };
             ValidateBook(book, null);
+
+            Model.AddBook(book);
         }
 
         private void EdditBook(Book book, string author, string titel, string publisher, DateTime dateOfPublication, int stock, int isbn)
@@ -121,6 +146,15 @@ namespace FunctionLayer
             };
 
             ValidateBook(tempBook, book);
+
+            book.Author = author;
+            book.Title = titel;
+            book.Publisher = publisher;
+            book.DateOfPublication = dateOfPublication;
+            book.Stock = stock;
+            book.ISBN = isbn;
+
+            Model.Update();
 
             SelectedBook = null;
         }
@@ -149,6 +183,10 @@ namespace FunctionLayer
                 IDNumber = idNumber,
                 Email = email,
             };
+
+            ValidateCustomer(customer, null);
+
+            Model.AddCustomer(customer);
         }
 
         private void EdditCustomer(Customer customer, int idNumber, string email)
@@ -159,6 +197,9 @@ namespace FunctionLayer
                 Email = email,
             };
 
+            ValidateCustomer(temCustomer, customer);
+
+            Model.Update();
 
             SelectedCustomer = null;
         }
@@ -180,14 +221,41 @@ namespace FunctionLayer
 
         }
 
-        public void SaveBookRental()
+        public void SaveBookRental(DateTime dateTime, Book book, Customer customer, int booksRented)
         {
+            if (book == null)
+            {
+                throw new ArgumentNullException(nameof(book));
+            }
+            if (customer == null)
+            {
+                throw new ArgumentNullException(nameof(customer));
+            }
+            if (book.BooksAvailable < booksRented)
+            {
+                throw new Exception("Cant rent more books than we have in stock");
+            }
 
+            
+
+
+            BookRental bookRental = new()
+            {
+                RentalStart = dateTime,
+                Customer = customer,
+                Book = book,
+                BooksRented = booksRented,
+            };
+
+            Model.AddBookRental(bookRental);
+
+            SelectedBook = null;
+            SelectedCustomer = null;
         }
 
-        public void DeleteBookRental()
+        public void DeleteBookRental(BookRental bookRental)
         {
-
+            Model.RemoveBookRental(bookRental);
         }
     }
 }
