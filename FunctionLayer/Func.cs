@@ -9,7 +9,14 @@ namespace FunctionLayer
     public class Func : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        Model Model { get; set; } = new();
+        private readonly Model Model;
+
+
+        public Func(bool mustSave = true)
+        {
+            Model = new Model(mustSave);
+        }
+
         private void RaisePropertyChanged(string propName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
@@ -59,15 +66,23 @@ namespace FunctionLayer
         {
             get
             {
-                switch (SelectedRentalType)
+                // This works too
+                //switch (SelectedRentalType)
+                //{
+                //    case RentalType.Active:
+                //        return ActiveRentals;
+                //    case RentalType.Overdue:
+                //        return OverdueRentals;
+                //    default:
+                //        return BookRentals;
+                //}
+                return SelectedRentalType switch
                 {
-                    case RentalType.Active:
-                        return ActiveRentals;
-                    case RentalType.Overdue:
-                        return OverdueRentals;
-                    default:
-                        return BookRentals;
-                }
+                    RentalType.Active => ActiveRentals,
+                    RentalType.Overdue => OverdueRentals,
+                    _ => BookRentals,
+
+                };
             }
         }
 
@@ -182,7 +197,7 @@ namespace FunctionLayer
             }
         }
 
-        private void NewBook(string author, string titel, string publisher, DateTime dateOfPublication, int stock, int isbn)
+        private void NewBook(string author, string titel, string publisher, DateTime dateOfPublication, int stock, long isbn)
         {
             Book book = new()
             {
@@ -198,7 +213,7 @@ namespace FunctionLayer
             Model.AddBook(book);
         }
 
-        private void EdditBook(Book book, string author, string titel, string publisher, DateTime dateOfPublication, int stock, int isbn)
+        private void EdditBook(Book book, string author, string titel, string publisher, DateTime dateOfPublication, int stock, long isbn)
         {
             Book tempBook = new()
             {
@@ -227,7 +242,7 @@ namespace FunctionLayer
             SelectedBook = null;
         }
 
-        public void SaveBook(string author, string titel, string publisher, DateTime dateOfPublication, int stock, int isbn)
+        public void SaveBook(string author, string titel, string publisher, DateTime dateOfPublication, int stock, long isbn)
         {
             if (SelectedBook == null)
             {
@@ -241,7 +256,16 @@ namespace FunctionLayer
 
         public void DeleteBook(Book book)
         {
+            if(book == null)
+            {
+                throw new ArgumentNullException(nameof(book));
+            }
+            if(book.Stock != book.BooksAvailable)
+            {
+                throw new Exception("Can't Delete a book if there any are rented out");
+            }
 
+            Model.RemoveBook(book);
         }
 
         private void NewCustomer(int idNumber, string email)
@@ -286,6 +310,16 @@ namespace FunctionLayer
 
         public void DeleteCustomer(Customer customer)
         {
+            if(customer == null)
+            {
+                throw new Exception();
+            }
+            if(customer.Rental.Count > 0)
+            {
+                throw new Exception("Can't Delete if they have not yet returend all books");
+            }
+
+            Model.RemoveCustomer(customer);
 
         }
 

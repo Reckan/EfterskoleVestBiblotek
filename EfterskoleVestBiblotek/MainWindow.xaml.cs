@@ -34,7 +34,7 @@ namespace EfterskoleVestBiblotek
         {
             try
             {
-                Func.SaveBook(TbxBookAuthor.Text, TbxBookTitle.Text, TbxBookPublisher.Text, (DateTime)DtPDatePublication.SelectedDate, int.Parse(TbxStock.Text), int.Parse(TbxISBN.Text));
+                Func.SaveBook(TbxBookAuthor.Text, TbxBookTitle.Text, TbxBookPublisher.Text, (DateTime)DtPDatePublication.SelectedDate, int.Parse(TbxStock.Text), long.Parse(TbxISBN.Text));
 
                 TbxBookAuthor.Text = "";
                 TbxBookTitle.Text = "";

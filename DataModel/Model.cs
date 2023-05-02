@@ -10,6 +10,8 @@ namespace DataModel
         private DbSet<Customer> Customers { get; set; }
         private DbSet<BookRental> BookRentals { get; set; }
 
+        private readonly bool mustSave;
+
         private ObservableCollection<Book> BookList
         {
             get
@@ -65,6 +67,7 @@ namespace DataModel
         }
 
         private readonly ReadOnlyObservableCollection<BookRental> _BookRental;
+
         public ReadOnlyObservableCollection<BookRental> BookRental
         {
             get
@@ -78,15 +81,19 @@ namespace DataModel
             options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=EfterskoleVestBiblotekDB;Trusted_Connection=True;");
         }
 
-        public Model()
+        public Model (bool mustSave)
         {
+            this.mustSave = mustSave;
             _Book = new ReadOnlyObservableCollection<Book>(BookList);
             _Customer = new ReadOnlyObservableCollection<Customer>(CustomerList);
             _BookRental = new ReadOnlyObservableCollection<BookRental>(BookRentalList);
         }
         private void DoSave()
         {
-            SaveChanges();
+            if (mustSave)
+            {
+                SaveChanges();
+            }
         }
         public void AddBook(Book book)
         {

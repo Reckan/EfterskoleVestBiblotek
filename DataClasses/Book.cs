@@ -62,8 +62,8 @@ namespace DataClasses
                 RaisePropertyChanged(nameof(Stock));
             }
         }
-        private int? isbn;
-        public int? ISBN
+        private long? isbn;
+        public long? ISBN
         {
             get
             {
