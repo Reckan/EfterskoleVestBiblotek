@@ -44,7 +44,7 @@
             </TabItem>
             <TabItem Header="Book Rentals">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="DgBookRentals" HorizontalAlignment="Left" Height="386" Margin="385,0,0,0" VerticalAlignment="Center" Width="399" ItemsSource="{Binding BookRentals}" IsReadOnly="True">
+                    <DataGrid x:Name="DgBookRentals" HorizontalAlignment="Left" Height="386" Margin="385,0,0,0" VerticalAlignment="Center" Width="399" ItemsSource="{Binding Rentals}" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Book" Binding="{Binding Book.Title}"/>
                             <DataGridTextColumn Header="Customer" Binding="{Binding Customer.Email}"/>
@@ -72,13 +72,15 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    
+
                     <Button x:Name="BtnRentBook" Content="Rent" HorizontalAlignment="Left" Margin="330,186,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnRentBook_Click"/>
                     <Button x:Name="BtnReturnBook" Content="Return" HorizontalAlignment="Left" Margin="330,216,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnReturnBook_Click"/>
                     <TextBox x:Name="TbxBooksRented" HorizontalAlignment="Left" Margin="31,152,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="LabelBook" Content="Book" HorizontalAlignment="Left" Margin="185,40,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="LabelCustomer" Content="Customer" HorizontalAlignment="Left" Margin="31,35,0,0" VerticalAlignment="Top"/>
                     <Label Content="Qty." HorizontalAlignment="Left" Margin="31,121,0,0" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="TxblBooksAvailable" HorizontalAlignment="Left" Margin="185,93,0,0" TextWrapping="Wrap" Text="{Binding SelectedBook.BooksAvailable}" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="CbxRentals" ItemsSource="{Binding RentalTypeList}" HorizontalAlignment="Left" Margin="260,12,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbxRentals_SelectionChanged"/>
 
                 </Grid>
             </TabItem>

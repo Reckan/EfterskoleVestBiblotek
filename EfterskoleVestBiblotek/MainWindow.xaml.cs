@@ -137,5 +137,17 @@ namespace EfterskoleVestBiblotek
                 Func.SelectedBook = (Book)CbxBooks.SelectedItem;
             }
         }
+
+        private void CbxRentals_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(e.AddedItems.Count > 0)
+            {
+                Func.SelectedRentalType = (Func.RentalType)e.AddedItems[0];
+            }
+            else
+            {
+                Func.SelectedRentalType = Func.RentalType.All;
+            }
+        }
     }
 }

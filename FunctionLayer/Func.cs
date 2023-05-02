@@ -39,6 +39,71 @@ namespace FunctionLayer
             }
         }
 
+        public enum RentalType { All, Active, Overdue };
+        public List<RentalType> RentalTypeList { get; set; } = new() { RentalType.All, RentalType.Active, RentalType.Overdue };
+        RentalType selectedRentalType;
+        public RentalType SelectedRentalType
+        {
+            private get
+            {
+                return selectedRentalType;
+            }
+            set
+            {
+                selectedRentalType = value;
+                RaisePropertyChanged(nameof(Rentals));
+            }
+        }
+
+        public ReadOnlyObservableCollection<BookRental> Rentals
+        {
+            get
+            {
+                switch (SelectedRentalType)
+                {
+                    case RentalType.Active:
+                        return ActiveRentals;
+                    case RentalType.Overdue:
+                        return OverdueRentals;
+                    default:
+                        return BookRentals;
+                }
+            }
+        }
+
+        public ReadOnlyObservableCollection<BookRental> ActiveRentals
+        {
+            get
+            {
+                IEnumerable<BookRental> list = from bookRental in BookRentals where DateTime.Today <= bookRental.RentalStart.AddDays(30) select bookRental;
+
+                ObservableCollection<BookRental> list1 = new(list);
+                ReadOnlyObservableCollection<BookRental> list2 = new(list1);
+                return list2;
+            }
+        }
+
+
+        //public IEnumerable<BookRental> OverdueRentals
+        //{
+        //    get
+        //    {
+        //        return from bookRental in BookRentals where bookRental.RentalStart.AddDays(30) < DateTime.Today select bookRental;
+        //    }
+        //}
+
+        public ReadOnlyObservableCollection<BookRental> OverdueRentals
+        {
+            get
+            {
+                IEnumerable<BookRental> list = from bookRental in BookRentals where bookRental.RentalStart.AddDays(30) < DateTime.Today select bookRental;
+
+                ObservableCollection<BookRental> list1 = new(list);
+                ReadOnlyObservableCollection<BookRental> list2 = new(list1);
+                return list2;
+            }
+        }
+
         private Book selectedBook;
         public Book SelectedBook
         {
@@ -156,6 +221,9 @@ namespace FunctionLayer
 
             Model.Update();
 
+            PropertyChanged?.Invoke(book, new PropertyChangedEventArgs(nameof(book.DateOfPublication)));
+            PropertyChanged?.Invoke(book, new PropertyChangedEventArgs(nameof(book.BooksAvailable)));
+
             SelectedBook = null;
         }
 
@@ -236,7 +304,7 @@ namespace FunctionLayer
                 throw new Exception("Cant rent more books than we have in stock");
             }
 
-            
+
 
 
             BookRental bookRental = new()
