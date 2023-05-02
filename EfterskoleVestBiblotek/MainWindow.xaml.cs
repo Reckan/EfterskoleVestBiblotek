@@ -77,6 +77,9 @@ namespace EfterskoleVestBiblotek
             try
             {
                 Func.SaveCustomer(int.Parse(TbxIDNumber.Text), TbxEmail.Text);
+
+                TbxIDNumber.Text = string.Empty;
+                TbxEmail.Text = string.Empty;
             }
             catch (Exception ex)
             {
@@ -86,7 +89,10 @@ namespace EfterskoleVestBiblotek
 
         private void BtnEdditCoustomer_Click(object sender, RoutedEventArgs e)
         {
-
+            Func.SelectedCustomer = DgCustomers.SelectedItem as Customer;
+            
+            TbxIDNumber.Text = (Func.SelectedCustomer != null) ? Func.SelectedCustomer.IDNumber.ToString() : string.Empty;
+            TbxEmail.Text = (Func.SelectedCustomer != null) ? Func.SelectedCustomer?.Email : string.Empty;
         }
 
         private void BtnDeleteCustomer_Click(object sender, RoutedEventArgs e)

@@ -10,7 +10,16 @@
         <TabControl>
             <TabItem Header="Books">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="DgBooks" HorizontalAlignment="Left" Height="264" Margin="468,36,0,0" VerticalAlignment="Top" Width="291" ItemsSource="{Binding Books}" IsReadOnly="True"/>
+                    <DataGrid x:Name="DgBooks" HorizontalAlignment="Left" Height="264" Margin="468,36,0,0" VerticalAlignment="Top" Width="291" ItemsSource="{Binding Books}" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
+                            <DataGridTextColumn Header="Author" Binding="{Binding Author}"/>
+                            <DataGridTextColumn Header="Date of Publication" Binding="{Binding DateOfPublication}"/>
+                            <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}"/>
+                            <DataGridTextColumn Header="Stock" Binding="{Binding Stock}"/>
+                            <DataGridTextColumn Header="Rental Orders" Binding="{Binding Rentals.Count}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <TextBox x:Name="TbxBookAuthor" HorizontalAlignment="Left" Margin="75,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <TextBox x:Name="TbxBookTitle" HorizontalAlignment="Left" Margin="75,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <TextBox x:Name="TbxBookPublisher" HorizontalAlignment="Left" Margin="75,154,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
@@ -18,7 +27,7 @@
                     <TextBox x:Name="TbxStock" HorizontalAlignment="Left" Margin="75,215,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <TextBox x:Name="TbxISBN" HorizontalAlignment="Left" Margin="75,267,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="LabelTbxAuthor" Content="Author:" HorizontalAlignment="Left" Margin="75,10,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="LabelTbxTitel" Content="Titel:" HorizontalAlignment="Left" Margin="75,71,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="LabelTbxTitle" Content="Title:" HorizontalAlignment="Left" Margin="75,71,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="LabelTbxBookPublisher" Content="Publisher:" HorizontalAlignment="Left" Margin="75,128,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="LabelTbxStock" Content="Stock:" HorizontalAlignment="Left" Margin="75,184,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="LabelTbxISBN" Content="ISBN:" HorizontalAlignment="Left" Margin="75,241,0,0" VerticalAlignment="Top"/>
@@ -31,7 +40,13 @@
             </TabItem>
             <TabItem Header="Customers">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="DgCustomers" HorizontalAlignment="Left" Height="386" Margin="482,0,0,0" VerticalAlignment="Center" Width="302" ItemsSource="{Binding Customers}" IsReadOnly="True"/>
+                    <DataGrid x:Name="DgCustomers" HorizontalAlignment="Left" Height="386" Margin="482,0,0,0" VerticalAlignment="Center" Width="302" ItemsSource="{Binding Customers}" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                            <DataGridTextColumn Header="ID Number" Binding="{Binding IDNumber}"/>
+                            <DataGridTextColumn Header="Book Orders" Binding="{Binding Rental.Count}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <TextBox x:Name="TbxIDNumber" HorizontalAlignment="Left" Margin="108,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <TextBox x:Name="TbxEmail" HorizontalAlignment="Left" Margin="111,156,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="LabelTbxIDNumber" Content="IDNumber:" HorizontalAlignment="Left" Margin="108,50,0,0" VerticalAlignment="Top"/>

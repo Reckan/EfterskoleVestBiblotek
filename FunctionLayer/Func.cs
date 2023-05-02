@@ -291,7 +291,13 @@ namespace FunctionLayer
 
             ValidateCustomer(temCustomer, customer);
 
+            customer.IDNumber = idNumber;
+            customer.Email = email;
+
             Model.Update();
+
+            //PropertyChanged?.Invoke(customer, new PropertyChangedEventArgs(nameof(BookRental.Customer.IDNumber)));
+            //PropertyChanged?.Invoke(customer, new PropertyChangedEventArgs(nameof(BookRental.Customer.Email)));
 
             SelectedCustomer = null;
         }
@@ -338,6 +344,15 @@ namespace FunctionLayer
                 throw new Exception("Cant rent more books than we have in stock");
             }
 
+            // Wasen't part of the Eksamen
+            foreach(BookRental bookRental1 in OverdueRentals)
+            {
+                if (bookRental1.Customer == customer)
+                {
+                    throw new Exception("Can't Rent new books if you havent returnde your overdue ones first");
+                }
+            }
+
 
 
 
@@ -350,6 +365,8 @@ namespace FunctionLayer
             };
 
             Model.AddBookRental(bookRental);
+
+            RaisePropertyChanged(nameof(customer));
 
             SelectedBook = null;
             SelectedCustomer = null;
