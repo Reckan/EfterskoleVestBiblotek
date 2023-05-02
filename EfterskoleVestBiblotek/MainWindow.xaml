@@ -7,6 +7,47 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <TabControl>
+            <TabItem Header="Books">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="DgBooks" HorizontalAlignment="Left" Height="264" Margin="468,36,0,0" VerticalAlignment="Top" Width="291" ItemsSource="{Binding Books}" IsReadOnly="True"/>
+                    <TextBox x:Name="TbxBookAuthor" HorizontalAlignment="Left" Margin="75,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="TbxBookTitle" HorizontalAlignment="Left" Margin="75,102,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="TbxBookPublisher" HorizontalAlignment="Left" Margin="75,154,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <DatePicker x:Name="DtPDatePublication" HorizontalAlignment="Left" Margin="235,36,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TbxStock" HorizontalAlignment="Left" Margin="75,215,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="TbxISBN" HorizontalAlignment="Left" Margin="75,267,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="LabelTbxAuthor" Content="Author:" HorizontalAlignment="Left" Margin="75,10,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="LabelTbxTitel" Content="Titel:" HorizontalAlignment="Left" Margin="75,71,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="LabelTbxBookPublisher" Content="Publisher:" HorizontalAlignment="Left" Margin="75,128,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="LabelTbxStock" Content="Stock:" HorizontalAlignment="Left" Margin="75,184,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="LabelTbxISBN" Content="ISBN:" HorizontalAlignment="Left" Margin="75,241,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="LabelDtPDatePublication" Content="Date of Publication" HorizontalAlignment="Left" Margin="235,5,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="BtnSaveBook" Content="Save" HorizontalAlignment="Left" Margin="413,249,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnSaveBook_Click"/>
+                    <Button x:Name="BtnEdditBook" Content="Eddit" HorizontalAlignment="Left" Margin="413,279,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnEdditBook_Click"/>
+                    <Button x:Name="BtnDeleteBook" Content="Delete" HorizontalAlignment="Left" Margin="413,309,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnDeleteBook_Click"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Customers">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="DgCustomers" HorizontalAlignment="Left" Height="386" Margin="482,0,0,0" VerticalAlignment="Center" Width="302" ItemsSource="{Binding Customers}"/>
+                    <TextBox x:Name="TbxIDNumber" HorizontalAlignment="Left" Margin="108,81,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="TbxEmail" HorizontalAlignment="Left" Margin="111,156,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="LabelTbxIDNumber" Content="IDNumber:" HorizontalAlignment="Left" Margin="108,50,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="LabelTbxEmail" Content="Email:" HorizontalAlignment="Left" Margin="111,125,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="BtnSaveCustomer" Content="Save" HorizontalAlignment="Left" Margin="427,292,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnSaveCustomer_Click"/>
+                    <Button x:Name="BtnEdditCoustomer" Content="Eddit" HorizontalAlignment="Left" Margin="427,322,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnEdditCoustomer_Click"/>
+                    <Button x:Name="BtnDeleteCustomer" Content="Delete" HorizontalAlignment="Left" Margin="427,352,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnDeleteCustomer_Click"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Book Rentals">
+                <Grid Background="#FFE5E5E5">
+
+                </Grid>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>

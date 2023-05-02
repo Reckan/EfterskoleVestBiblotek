@@ -80,7 +80,34 @@ namespace DataModel
 
         public Model()
         {
+            _Book = new ReadOnlyObservableCollection<Book>(BookList);
+            _Customer = new ReadOnlyObservableCollection<Customer>(CustomerList);
+            _BookRental = new ReadOnlyObservableCollection<BookRental>(BookRentalList);
+        }
+        private void DoSave()
+        {
+            SaveChanges();
+        }
+        public void AddBook(Book book)
+        {
+            Books.Add(book);
+            DoSave();
+        }
+        public void RemoveBook(Book book)
+        {
+            Books.Remove(book);
+            DoSave();
+        }
 
+        public void AddCustomer(Customer customer)
+        {
+            Customers.Add(customer);
+            DoSave();
+        }
+        public void RemoveCustomer(Customer customer)
+        {
+            Customers.Remove(customer);
+            DoSave();
         }
     }
 }

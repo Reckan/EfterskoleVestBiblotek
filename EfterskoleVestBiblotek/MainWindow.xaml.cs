@@ -27,5 +27,46 @@ namespace EfterskoleVestBiblotek
             InitializeComponent();
             DataContext = Func;
         }
+
+        private void BtnSaveBook_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Func.SaveBook(TbxBookAuthor.Text, TbxBookTitle.Text, TbxBookPublisher.Text, (DateTime)DtPDatePublication.SelectedDate, int.Parse(TbxStock.Text), int.Parse(TbxISBN.Text));
+               
+                TbxBookAuthor.Text = "";
+                TbxBookTitle.Text = "";
+                TbxBookPublisher.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+
+        private void BtnEdditBook_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnDeleteBook_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnSaveCustomer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnEdditCoustomer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnDeleteCustomer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
