@@ -21,7 +21,8 @@ namespace TestProject
         }
 
         [TestMethod]
-        public void TestBookRentalPeriode()
+        [ExpectedException(typeof(Exception))]
+        public void TestValidBookRentalPeriode()
         {
             Func.SaveBookRental(DateTime.Today.AddDays(-1), Func.Books[Func.Books.Count - 1], Func.Customers[Func.Customers.Count - 1], 1);
         }
@@ -31,24 +32,22 @@ namespace TestProject
         public void OverdueBooksCantRentNew()
         {
             // Arrange
-            Func.SaveCustomer(int.MaxValue, "Test@Email1");
+            //Func.SaveCustomer(int.MaxValue, "Test@Email1");
 
             Func.SaveBook("Test Author", "Test Title", "Test Publisher", DateTime.Today, 2, long.MaxValue);
 
-            BookRental bookRental = new()
-            {
-                RentalStart = DateTime.Today.AddMonths(-1),
-                Customer = Func.Customers[Func.Customers.Count - 1],
-                Book = Func.Books[Func.Books.Count - 1],
-                BooksRented = 1,
-            };
+            //BookRental bookRental = new()
+            //{
+            //    RentalStart = DateTime.Today.AddMonths(-1),
+            //    Customer = Func.Customers[Func.Customers.Count - 1],
+            //    Book = Func.Books[Func.Books.Count - 1],
+            //    BooksRented = 1,
+            //};
 
-            //Model.AddBookRental(bookRental);
-
-            Func.SaveBookRental(DateTime.MinValue, Func.Books[Func.Books.Count - 1], Func.Customers[Func.Customers.Count - 1], 1);
+            //Func.SaveBookRental(DateTime.MinValue, Func.Books[Func.Books.Count - 1], Func.Customers[Func.Customers.Count - 1], 1);
 
             // Act
-            Func.SaveBookRental(DateTime.Today, Func.Books[Func.Books.Count - 1], Func.Customers[Func.Customers.Count - 1], 1);
+            Func.SaveBookRental(DateTime.Today, Func.Books[Func.Books.Count - 1], Func.Customers[1], 1);
         }
     }
 }

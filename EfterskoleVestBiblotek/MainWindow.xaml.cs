@@ -97,7 +97,14 @@ namespace EfterskoleVestBiblotek
 
         private void BtnDeleteCustomer_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                Func.DeleteCustomer(DgCustomers.SelectedItem as Customer);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
 
         private void BtnRentBook_Click(object sender, RoutedEventArgs e)

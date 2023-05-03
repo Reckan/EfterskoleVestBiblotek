@@ -375,7 +375,7 @@ namespace FunctionLayer
 
             Model.AddBookRental(bookRental);
 
-            RaisePropertyChanged(nameof(customer));
+            PropertyChanged?.Invoke(customer, new PropertyChangedEventArgs(nameof(customer.Rental)));
 
             SelectedBook = null;
             SelectedCustomer = null;
@@ -384,6 +384,8 @@ namespace FunctionLayer
         public void DeleteBookRental(BookRental bookRental)
         {
             Model.RemoveBookRental(bookRental);
+            PropertyChanged?.Invoke(bookRental.Customer, new PropertyChangedEventArgs(nameof(bookRental.Customer.Rental)));
+
         }
     }
 }

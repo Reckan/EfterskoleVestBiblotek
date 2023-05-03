@@ -40,7 +40,7 @@
             </TabItem>
             <TabItem Header="Customers">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="DgCustomers" HorizontalAlignment="Left" Height="386" Margin="482,0,0,0" VerticalAlignment="Center" Width="302" ItemsSource="{Binding Customers}" IsReadOnly="True">
+                    <DataGrid x:Name="DgCustomers" HorizontalAlignment="Left" Height="386" Margin="482,0,0,0" VerticalAlignment="Center" Width="302" ItemsSource="{Binding Customers}" IsReadOnly="True" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
                             <DataGridTextColumn Header="ID Number" Binding="{Binding IDNumber}"/>
