@@ -15,6 +15,7 @@
                             <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
                             <DataGridTextColumn Header="Author" Binding="{Binding Author}"/>
                             <DataGridTextColumn Header="Date of Publication" Binding="{Binding DateOfPublication}"/>
+                            <DataGridTextColumn Header="Publisher" Binding="{Binding Publisher}"/>
                             <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}"/>
                             <DataGridTextColumn Header="Stock" Binding="{Binding Stock}"/>
                             <DataGridTextColumn Header="Rental Orders" Binding="{Binding Rentals.Count}"/>
