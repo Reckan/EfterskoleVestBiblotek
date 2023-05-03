@@ -10,7 +10,7 @@
         <TabControl>
             <TabItem Header="Books">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="DgBooks" HorizontalAlignment="Left" Height="264" Margin="468,36,0,0" VerticalAlignment="Top" Width="291" ItemsSource="{Binding Books}" IsReadOnly="True">
+                    <DataGrid x:Name="DgBooks" HorizontalAlignment="Left" Height="264" Margin="397,36,0,0" VerticalAlignment="Top" Width="362" ItemsSource="{Binding Books}" IsReadOnly="True" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
                             <DataGridTextColumn Header="Author" Binding="{Binding Author}"/>
@@ -32,9 +32,9 @@
                     <Label x:Name="LabelTbxStock" Content="Stock:" HorizontalAlignment="Left" Margin="75,184,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="LabelTbxISBN" Content="ISBN:" HorizontalAlignment="Left" Margin="75,241,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="LabelDtPDatePublication" Content="Date of Publication" HorizontalAlignment="Left" Margin="235,5,0,0" VerticalAlignment="Top"/>
-                    <Button x:Name="BtnSaveBook" Content="Save" HorizontalAlignment="Left" Margin="413,249,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnSaveBook_Click"/>
-                    <Button x:Name="BtnEdditBook" Content="Eddit" HorizontalAlignment="Left" Margin="413,279,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnEdditBook_Click"/>
-                    <Button x:Name="BtnDeleteBook" Content="Delete" HorizontalAlignment="Left" Margin="413,309,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnDeleteBook_Click"/>
+                    <Button x:Name="BtnSaveBook" Content="Save" HorizontalAlignment="Left" Margin="326,224,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnSaveBook_Click"/>
+                    <Button x:Name="BtnEdditBook" Content="Eddit" HorizontalAlignment="Left" Margin="326,254,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnEdditBook_Click"/>
+                    <Button x:Name="BtnDeleteBook" Content="Delete" HorizontalAlignment="Left" Margin="326,284,0,0" VerticalAlignment="Top" Height="25" Width="50" Click="BtnDeleteBook_Click"/>
 
                 </Grid>
             </TabItem>
@@ -59,10 +59,12 @@
             </TabItem>
             <TabItem Header="Book Rentals">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="DgBookRentals" HorizontalAlignment="Left" Height="386" Margin="385,0,0,0" VerticalAlignment="Center" Width="399" ItemsSource="{Binding Rentals}" IsReadOnly="True">
+                    <DataGrid x:Name="DgBookRentals" HorizontalAlignment="Left" Height="386" Margin="385,0,0,0" VerticalAlignment="Center" Width="399" ItemsSource="{Binding Rentals}" IsReadOnly="True" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Book" Binding="{Binding Book.Title}"/>
                             <DataGridTextColumn Header="Customer" Binding="{Binding Customer.Email}"/>
+                            <DataGridTextColumn Header="Rental Start" Binding="{Binding RentalStart}"/>
+                            <DataGridTextColumn Header="Books Rented" Binding="{Binding BooksRented}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <ComboBox x:Name="CbxCustomers" HorizontalAlignment="Left" Margin="31,66,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbxCustomers_SelectionChanged" ItemsSource="{Binding Customers}">

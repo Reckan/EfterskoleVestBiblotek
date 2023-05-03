@@ -178,11 +178,11 @@ namespace FunctionLayer
         {
             if (customerInfo.IDNumber < 1)
             {
-                throw new Exception("");
+                throw new Exception("ID Number can't be negative");
             }
             if (customerInfo.Email == "")
             {
-                throw new Exception("");
+                throw new Exception("Email is required");
             }
             foreach (Customer customer in Customers)
             {
@@ -242,15 +242,15 @@ namespace FunctionLayer
             SelectedBook = null;
         }
 
-        public void SaveBook(string author, string titel, string publisher, DateTime dateOfPublication, int stock, long isbn)
+        public void SaveBook(string author, string title, string publisher, DateTime dateOfPublication, int stock, long isbn)
         {
             if (SelectedBook == null)
             {
-                NewBook(author, titel, publisher, dateOfPublication, stock, isbn);
+                NewBook(author, title, publisher, dateOfPublication, stock, isbn);
             }
             else
             {
-                EdditBook(SelectedBook, author, titel, publisher, dateOfPublication, stock, isbn);
+                EdditBook(SelectedBook, author, title, publisher, dateOfPublication, stock, isbn);
             }
         }
 
@@ -330,7 +330,7 @@ namespace FunctionLayer
         }
 
         public void SaveBookRental(DateTime dateTime, Book book, Customer customer, int booksRented)
-        {
+        {          
             if (book == null)
             {
                 throw new ArgumentNullException(nameof(book));
