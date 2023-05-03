@@ -256,11 +256,11 @@ namespace FunctionLayer
 
         public void DeleteBook(Book book)
         {
-            if(book == null)
+            if (book == null)
             {
                 throw new ArgumentNullException(nameof(book));
             }
-            if(book.Stock != book.BooksAvailable)
+            if (book.Stock != book.BooksAvailable)
             {
                 throw new Exception("Can't Delete a book if there any are rented out");
             }
@@ -316,11 +316,11 @@ namespace FunctionLayer
 
         public void DeleteCustomer(Customer customer)
         {
-            if(customer == null)
+            if (customer == null)
             {
                 throw new Exception();
             }
-            if(customer.Rental.Count > 0)
+            if (customer.Rental.Count > 0)
             {
                 throw new Exception("Can't Delete if they have not yet returend all books");
             }
@@ -330,10 +330,19 @@ namespace FunctionLayer
         }
 
         public void SaveBookRental(DateTime dateTime, Book book, Customer customer, int booksRented)
-        {          
+        {
+
+            if (dateTime < DateTime.Today)
+            {
+                throw new Exception("Can't rent a book in the past");
+            }
             if (book == null)
             {
                 throw new ArgumentNullException(nameof(book));
+            }
+            if (booksRented < 1)
+            {
+                throw new Exception("You can't rent less tham 1 book");
             }
             if (customer == null)
             {
@@ -345,7 +354,7 @@ namespace FunctionLayer
             }
 
             // Wasen't part of the Eksamen
-            foreach(BookRental bookRental1 in OverdueRentals)
+            foreach (BookRental bookRental1 in OverdueRentals)
             {
                 if (bookRental1.Customer == customer)
                 {
